@@ -29,6 +29,11 @@ public class GradientBackgroundPainter {
     private final Context context;
     private CompositeDisposable mCompositeDisposable;
     private static  Drawable LastDrawable =null;
+    /**
+     * set TransitionTime in MILLISECONDS
+     */
+    private final long TransitionTime=2000;
+
 
 
     public GradientBackgroundPainter(@NonNull final AppCompatImageView target) {
@@ -36,10 +41,11 @@ public class GradientBackgroundPainter {
         context = target.getContext().getApplicationContext();
         mCompositeDisposable=new CompositeDisposable();
 
+
     }
 
     public void Start(){
-        Observable<Long> observable = Observable.interval(5, TimeUnit.SECONDS, Schedulers.io());
+        Observable<Long> observable = Observable.interval(TransitionTime, TimeUnit.MILLISECONDS, Schedulers.io());
         mCompositeDisposable.add(observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -50,13 +56,13 @@ public class GradientBackgroundPainter {
                         if (LastDrawable == null) {
                             LastDrawable = ContextCompat.getDrawable(context, R.drawable.colors1);
                         }
-                        GradientDrawable gd1= new GradientDrawable(getRandom(), new int[] {getMatColor("300"),getMatColor("300")});
+                        GradientDrawable gd1= new GradientDrawable(getRandom(), new int[] {getMatColor("600"),getMatColor("300")});
                         gd1.setCornerRadius(0f);
                         gd1.setGradientType(GradientDrawable.LINEAR_GRADIENT);
                         TransitionDrawable transitionDrawable = new TransitionDrawable(new Drawable[] {LastDrawable, gd1 });
                         transitionDrawable.setCrossFadeEnabled(false);
                         //transitionDrawable.setAlpha(1);
-                        transitionDrawable.startTransition(5000);
+                        transitionDrawable.startTransition((int) TransitionTime);
                         target.setImageDrawable(transitionDrawable);
                         LastDrawable =gd1;
                     }
