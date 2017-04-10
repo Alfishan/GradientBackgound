@@ -80,6 +80,12 @@ public class GradientBackgroundPainter {
         }
     }
 
+    /**
+     * to get random material color from array
+     * @param typeColor // please take a look at array of colors for valid values
+     *
+     * @return random material random color
+     */
     private int getMatColor(String typeColor) {
         int returnColor = Color.BLACK;
         int arrayId = context.getResources().getIdentifier("mdcolor_" + typeColor, "array", context.getPackageName());
@@ -92,6 +98,10 @@ public class GradientBackgroundPainter {
         return returnColor;
     }
 
+    /**
+     *
+     * @return random GradientDrawable.Orientation
+     */
     private static GradientDrawable.Orientation getRandom() {
         return GradientDrawable.Orientation.values()[(int) (Math.random() * GradientDrawable.Orientation.values().length)];
     }
