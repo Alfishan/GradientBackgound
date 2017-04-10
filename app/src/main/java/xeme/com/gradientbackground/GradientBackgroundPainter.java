@@ -32,7 +32,7 @@ public class GradientBackgroundPainter {
     /**
      * set TransitionTime in MILLISECONDS
      */
-    private final long TransitionTime=2000;
+    private final long TransitionTime=7000;
 
 
 
